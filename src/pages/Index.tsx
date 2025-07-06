@@ -1,10 +1,14 @@
-
 import React, { useState, useEffect } from 'react';
 import GameHeader from '../components/GameHeader';
 import CarDealership from '../components/CarDealership';
 import MoneyTransfer from '../components/MoneyTransfer';
 import JobCenter from '../components/JobCenter';
 import PlayerInventory from '../components/PlayerInventory';
+import CityMap from '../components/CityMap';
+import ShopSystem from '../components/ShopSystem';
+import BankSystem from '../components/BankSystem';
+import PlayerProfile from '../components/PlayerProfile';
+import PropertyMarket from '../components/PropertyMarket';
 import { toast } from 'sonner';
 
 interface Player {
@@ -114,16 +118,40 @@ const Index = () => {
     }
   };
 
+  const handleChangeName = (newName: string) => {
+    if (newName.trim() && currentPlayer.money >= 1000) {
+      setCurrentPlayer(prev => ({ ...prev, name: newName.trim(), money: prev.money - 1000 }));
+      toast.success(`Name changed to ${newName.trim()} for $1,000!`);
+    } else if (currentPlayer.money < 1000) {
+      toast.error("Not enough money! Name change costs $1,000");
+    }
+  };
+
+  const handlePurchase = (item: string, cost: number) => {
+    if (currentPlayer.money >= cost) {
+      setCurrentPlayer(prev => ({ ...prev, money: prev.money - cost }));
+      setExperience(prev => prev + Math.floor(cost / 100));
+      toast.success(`Purchased ${item} for $${cost.toLocaleString()}!`);
+    } else {
+      toast.error("Not enough money!");
+    }
+  };
+
   const tabs = [
     { id: 'dealership', name: 'Car Dealership', icon: '🚗' },
     { id: 'garage', name: 'My Garage', icon: '🏠' },
     { id: 'jobs', name: 'Job Center', icon: '💼' },
     { id: 'transfer', name: 'Money Transfer', icon: '💸' },
+    { id: 'map', name: 'City Map', icon: '🗺️' },
+    { id: 'shop', name: 'Shopping Mall', icon: '🛍️' },
+    { id: 'bank', name: 'Bank', icon: '🏦' },
+    { id: 'profile', name: 'Profile', icon: '👤' },
+    { id: 'property', name: 'Real Estate', icon: '🏢' },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
-      <style jsx global>{`
+      <style>{`
         .glow-text {
           text-shadow: 0 0 10px currentColor;
         }
@@ -192,6 +220,42 @@ const Index = () => {
               currentPlayerId={currentPlayer.id}
               playerMoney={currentPlayer.money}
               onSendMoney={handleSendMoney}
+            />
+          )}
+
+          {activeTab === 'map' && (
+            <CityMap 
+              playerMoney={currentPlayer.money}
+              onPurchase={handlePurchase}
+            />
+          )}
+
+          {activeTab === 'shop' && (
+            <ShopSystem 
+              playerMoney={currentPlayer.money}
+              onPurchase={handlePurchase}
+            />
+          )}
+
+          {activeTab === 'bank' && (
+            <BankSystem 
+              playerMoney={currentPlayer.money}
+              onTransaction={(amount) => setCurrentPlayer(prev => ({ ...prev, money: prev.money + amount }))}
+            />
+          )}
+
+          {activeTab === 'profile' && (
+            <PlayerProfile 
+              player={currentPlayer}
+              onChangeName={handleChangeName}
+              experience={experience}
+            />
+          )}
+
+          {activeTab === 'property' && (
+            <PropertyMarket 
+              playerMoney={currentPlayer.money}
+              onPurchase={handlePurchase}
             />
           )}
         </div>

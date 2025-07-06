@@ -14,7 +14,7 @@ const GameHeader = ({ playerName, money, level, experience }: GameHeaderProps) =
     <div className="bg-gradient-to-r from-purple-900 via-blue-900 to-indigo-900 p-6 shadow-2xl border-b-2 border-cyan-400">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center space-x-6">
-          <h1 className="text-3xl font-bold text-cyan-400 glow-text">City Life RPG</h1>
+          <h1 className="text-3xl font-bold text-cyan-400 glow-text">DalwarPG</h1>
           <div className="flex items-center space-x-2 bg-black/30 px-4 py-2 rounded-lg border border-cyan-400/30">
             <Users className="w-5 h-5 text-green-400" />
             <span className="text-white font-semibold">{playerName}</span>
