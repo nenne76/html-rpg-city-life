@@ -17,7 +17,7 @@ const BankSystem = ({ playerMoney, onTransaction }: BankSystemProps) => {
 
   const handleInvestment = () => {
     if (playerMoney >= investAmount) {
-      const profit = Math.floor(investAmount * 0.15);
+      const profit = Math.floor(investAmount * 0.35);
       onTransaction(-investAmount + profit);
     }
   };
@@ -42,9 +42,9 @@ const BankSystem = ({ playerMoney, onTransaction }: BankSystemProps) => {
               <label className="block text-gray-300 mb-2">Loan Amount</label>
               <input
                 type="range"
-                min="1000"
-                max="50000"
-                step="1000"
+                min="5000"
+                max="100000"
+                step="5000"
                 value={loanAmount}
                 onChange={(e) => setLoanAmount(Number(e.target.value))}
                 className="w-full"
@@ -97,7 +97,7 @@ const BankSystem = ({ playerMoney, onTransaction }: BankSystemProps) => {
               {playerMoney >= investAmount ? 'Invest Now' : 'Insufficient Funds'}
             </button>
             
-            <p className="text-gray-400 text-xs">Expected return: 15% profit</p>
+            <p className="text-gray-400 text-xs">Expected return: 35% profit</p>
           </div>
         </div>
       </div>

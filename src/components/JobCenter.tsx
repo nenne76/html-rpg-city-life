@@ -24,8 +24,8 @@ const JobCenter = ({ onTakeJob, currentJob, timeRemaining }: JobCenterProps) => 
       id: 1,
       title: "Delivery Driver",
       description: "Deliver packages across the city",
-      reward: 500,
-      duration: 30,
+      reward: 1500,
+      duration: 10,
       difficulty: 1,
       category: "Transport"
     },
@@ -33,8 +33,8 @@ const JobCenter = ({ onTakeJob, currentJob, timeRemaining }: JobCenterProps) => 
       id: 2,
       title: "Security Guard",
       description: "Protect a warehouse overnight",
-      reward: 1200,
-      duration: 60,
+      reward: 3500,
+      duration: 15,
       difficulty: 2,
       category: "Security"
     },
@@ -42,8 +42,8 @@ const JobCenter = ({ onTakeJob, currentJob, timeRemaining }: JobCenterProps) => 
       id: 3,
       title: "Bank Heist",
       description: "High-risk, high-reward illegal job",
-      reward: 5000,
-      duration: 90,
+      reward: 15000,
+      duration: 25,
       difficulty: 4,
       category: "Criminal"
     },
@@ -51,8 +51,8 @@ const JobCenter = ({ onTakeJob, currentJob, timeRemaining }: JobCenterProps) => 
       id: 4,
       title: "Corporate Executive",
       description: "Make important business decisions",
-      reward: 2500,
-      duration: 45,
+      reward: 7500,
+      duration: 20,
       difficulty: 3,
       category: "Business"
     }
